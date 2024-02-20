@@ -42,7 +42,8 @@ class App extends React.Component {
 
     //async fetchWeather() {
     fetchWeather = async () => {
-        if (this.state.location.length < 2) return;
+        if (this.state.location.length < 2)
+            return this.setState({ weather: {} });
         try {
             this.setState({ isLoading: true });
             // 1) Getting location (geocoding)
@@ -129,6 +130,11 @@ class Input extends React.Component {
 }
 
 class Weather extends React.Component {
+    //like cleanup
+    componentWillUnmount() {
+        //this.props.setLocation({ weather: {} });
+        console.log("Weather will unmount");
+    }
     render() {
         const {
             temperature_2m_max: max,
